@@ -1,0 +1,29 @@
+ <%= form_for @article do |f| %>
+
+<%= f.label :title %>
+
+<%= f.text_field :title %>
+
+<br/>
+
+<%= f.label :content %>
+
+<%= f.text_area :content, cols: 20, rows: 10 %>
+
+<br/>
+
+<%= f.label :status %>
+
+<%= f.radio_button :status, "active" %>
+
+<%= label :article_status, 'active' %>
+
+<%= f.radio_button :status, "off", :checked => true %>
+
+<%= label :article_status, 'off' %>
+
+<br/>
+
+<%= f.submit :submit %>
+
+<% end %>
