@@ -1,0 +1,9 @@
+ <%= form_for @employee do |p|%>
+<%= p.label :name %>
+<%= p.text_field :name%>
+<br/>
+<%= p.label :address %>
+<%= p.text_area :address, cols: 30, rows: 10%>
+<br/>
+<%= p.submit :submit%>
+<% end %>
