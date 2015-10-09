@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all
     #@articles = Article.status_active
-    
+    #@articles = Article.order(:name).page params[:page]    
   end
 
   def new
@@ -54,6 +54,7 @@ class ArticlesController < ApplicationController
       redirect_to action: 'index'
     end
   end
+  
   private
   def params_article
     params.require(:article).permit(:title, :content, :status)

@@ -43,3 +43,6 @@ end
 
 # Use debugger
  gem 'byebug', group: [:development, :test]
+ gem 'bootstrap-sass', '~> 3.2.0'
+ gem 'autoprefixer-rails'
+ gem 'kaminari', '~> 0.16.3'

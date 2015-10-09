@@ -7,4 +7,5 @@ class Article < ActiveRecord::Base
   default_scope {where(status: 'active')}
   #name relation must plural
   has_many :comments, dependent: :destroy
+ # max_paginates_per 10
 end
