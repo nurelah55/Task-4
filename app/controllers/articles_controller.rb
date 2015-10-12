@@ -2,8 +2,29 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all
     #@articles = Article.status_active
-    #@articles = Article.order(:name).page params[:page]    
+    #@users = User.order(:name).page params[:page]
+    #@articles = Article.page params[:page]
+    #@articles = Article.order(:title).page params[:page]
+    respond_to do |format|
+      format.html {
+        @articles = Article.order(:title).page params[:page]
+      }
+      format.js {
+        @articles = Article.order(:title).page params[:page]
+      }
+      format.csv { send_data Article.to_csv(@articles) }
+      format.xls 
+    end
   end
+
+  
+
+  def import
+    Article.import(params[:file])
+    
+    redirect_to root_url, notice: "Products imported."
+  end
+
 
   def new
     @article = Article.new

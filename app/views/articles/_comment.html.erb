@@ -1,0 +1,9 @@
+<div class="comment">
+<% fields_for "article[comment_attributes][]", comment do |comment_form| %>
+  <p>
+    Comment: <%= comment_form.text_field :content %>
+    <%= link_to_function "remove", "$(this).up('.comment').remove()" %>
+  </p>
+<% end %>
+</div>
+

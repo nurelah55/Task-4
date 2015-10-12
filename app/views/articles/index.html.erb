@@ -1,23 +1,50 @@
- <% @articles.each do |article| %>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <title><%= content_for?(:title) ?
+    yield(:title) : "Myapp" %></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head> 
+  <body >
+    <header class="navbar navbar-fixed-top">
+      <nav class="navbar-inner">
+        <div class="container">
 
-<h3><%= article.title %></h3>
+		</div>
+      </nav>
+    </header>
+    <div id="main" role="main">
+      <div class="container">
+        <div class="content">
+		<div class="row">
+			
+            <%= render "list" %>    
+        </div>
+		<p>
+			  Download:
+			  <%= link_to 'CSV', articles_path(format: "csv") %> |
+			  <%= link_to 'Excel', articles_path(format: "xls") %>
+			</p>
+			
+		<h2>Import Articles</h2>
+			<%= form_tag import_articles_path, multipart: true do %>
+			  <%= file_field_tag :file %>
+			  <%= submit_tag "Import" %>
+			<% end %>
 
-<p><%= article.content.truncate(20) %>
-	
-	<%= link_to 'read more', article_path(article.id) %>
-</p>
-
-<h4>status : <%= article.status %></h4>
-
-<p>
-	<span><%= link_to 'edit', edit_article_path(article.id)%></span>
-	<span>|</span>
-	<span><%= link_to 'delete', article_path(article.id), method: "DELETE", data: {confirm: 'Delete this data ?'} %></span>
-</p>
-<br/>
-<p>	
-<span><%= link_to 'add comment', new_comment_path %></span>
-</p>
-<hr/>
-
-<% end %>
+		<footer>
+          	
+        </footer>
+        </div>
+      </div> <!--! end of .container -->
+    </div> <!--! end of #main -->
+  </body>
+</html>

@@ -1,31 +1,32 @@
- <%= form_for @article do |f| %>
 
-<%= f.label :title %>
+             <%= form_for @article do |f| %>
 
-<%= f.text_field :title %>
-<%= @article.errors[:title].first unless @article.errors[:title].blank? %>
+			<%= f.label :title %>
 
-<br/>
+			<%= f.text_field :title %>
+			<%= @article.errors[:title].first unless @article.errors[:title].blank? %>
 
-<%= f.label :content %>
+			<br/>
 
-<%= f.text_area :content, cols: 20, rows: 10 %>
-<%= @article.errors[:content].first unless @article.errors[:content].blank? %>
+			<%= f.label :content %>
 
-<br/>
+			<%= f.text_area :content, cols: 20, rows: 10 %>
+			<%= @article.errors[:content].first unless @article.errors[:content].blank? %>
 
-<%= f.label :status %>
+			<br/>
 
-<%= f.radio_button :status, "active" %>
+			<%= f.label :status %>
 
-<%= label :article_status, 'active' %>
+			<%= f.radio_button :status, "active" %>
 
-<%= f.radio_button :status, "off", :checked => true %>
+			<%= label :article_status, 'active' %>
 
-<%= label :article_status, 'off' %>
+			<%= f.radio_button :status, "off", :checked => true %>
 
-<br/>
+			<%= label :article_status, 'off' %>
 
-<%= f.submit :submit %>
+			<br/>
 
-<% end %>
+			<%= f.submit :submit %>
+
+			<% end %>    
