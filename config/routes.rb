@@ -1,13 +1,14 @@
 Myblog::Application.routes.draw do
   resources :motor_cycles
   resources :employees
-  resources :comments
+  
   
   root :to=> "articles#index"
   #root :to=> "employees#index"
    #plural 
   resources :articles do
     collection { post :import }
+    resources :comments
   end# The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

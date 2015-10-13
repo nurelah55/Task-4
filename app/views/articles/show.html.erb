@@ -1,5 +1,32 @@
 <h3><%= @article.title %></h3>
 <p><%= @article.content %></p>
+
+<% unless @article.comments.empty? %>
+    <%= @article.comments.count %>
+  <% end %> comments</p>
+
+	<%= form_for [@article, @comment], html: {class: 'form-horizontal', role: "form"} do |f| %>
+    <p>
+    <%= f.label :content, "New Comment" %><br/>
+    <%= f.text_area :content %>
+    </p>
+    <p><%= f.submit "Add Comment"%></p>
+    <% end %>
+    
+
+    <p>
+			  Exsport to:
+			  
+			  <%= link_to 'Excel', articles_path(format: "xls") %>
+			</p>
+			
+		<h2>Import Articles</h2>
+			<%= form_tag import_articles_path, multipart: true do %>
+			  <%= file_field_tag :file %>
+			  <%= submit_tag "Import" %>
+			<% end %>
+
+			
 <p><%= link_to 'back to index', articles_path %></p>
 
 

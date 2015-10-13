@@ -19,7 +19,6 @@ class Article < ActiveRecord::Base
 	  	end		
   	end
   
-
 	def self.import(file)
 	  spreadsheet = open_spreadsheet(file)
 	  header = spreadsheet.row(1)
@@ -33,11 +32,11 @@ class Article < ActiveRecord::Base
 
 
 	def self.open_spreadsheet(file)
-	  case File.extname(file.original_filename)
+	  case File.extname(file.path)
 	  when '.csv' then Csv.new(file.path, nil, :ignore)
 	  when '.xls' then Excel.new(file.path, nil, :ignore)
 	  when '.xlsx' then Excelx.new(file.path, nil, :ignore)
-	  else raise "Unknown file type: #{file.original_filename}"
+	  
 	  end
 	end
 

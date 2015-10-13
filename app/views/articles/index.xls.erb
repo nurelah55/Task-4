@@ -7,23 +7,25 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Title</Data></Cell>
         <Cell><Data ss:Type="String">Content</Data></Cell>
-        <Cell><Data ss:Type="String">create at</Data></Cell>
-        <Cell><Data ss:Type="String">update at</Data></Cell>
-        <Cell><Data ss:Type="String">status at</Data></Cell>
+        <Cell><Data ss:Type="String">Status</Data></Cell>
+        <Cell><Data ss:Type="String">Comment</Data></Cell>
       </Row>
-    <% @articles.each do |article| %>
-      <Row>
-        <Cell><Data ss:Type="Number"><%= article.id %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= article.title %></Data></Cell>
+
+<% @articles.each do |article| %>
+<% article.comments.each do |comment|%>
+  <Row>
+<Cell><Data ss:Type="String"><%= article.title %></Data></Cell>
         <Cell><Data ss:Type="String"><%= article.content %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= article.created_at %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= article.updated_at %></Data></Cell>
         <Cell><Data ss:Type="String"><%= article.status %></Data></Cell>
-      </Row>
-    <% end %>
+        <Cell><Data ss:Type="String"><%= comment.content %></Data></Cell>
+  </Row>
+<% end %>
+<% end %>    
+
+
+    
     </Table>
   </Worksheet>
 </Workbook>

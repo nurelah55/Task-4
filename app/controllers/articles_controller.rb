@@ -1,7 +1,10 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
-    #@articles = Article.status_active
+#    @articles = Article.all
+    @articles = Article.all.includes(:comments)
+    #@articles = Article.joins('LEFT INNER JOIN comments ON comments.article_id = articles.id')
+   # @comments = Article.find_by_id(params[:id]).comments
+   #@articles = Article.status_active
     #@users = User.order(:name).page params[:page]
     #@articles = Article.page params[:page]
     #@articles = Article.order(:title).page params[:page]
@@ -18,11 +21,10 @@ class ArticlesController < ApplicationController
   end
 
   
-
   def import
     Article.import(params[:file])
     
-    redirect_to root_url, notice: "Products imported."
+    redirect_to root_url, notice: "Articles imported."
   end
 
 
@@ -44,6 +46,10 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find_by_id(params[:id])
+    @comment = Comment.new
+    #@comments = Article.find(params[:id]).comments
+    @comments = Comment.all.map{|x| [x.content, x.id]}
+    Article.find(params[:id])
   end
   
   def edit
