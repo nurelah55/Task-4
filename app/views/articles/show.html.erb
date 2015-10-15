@@ -15,17 +15,11 @@
     
 
     <p>
-			  Exsport to:
+	Exsport to:
 			  
-			  <%= link_to 'Excel', articles_path(format: "xls") %>
-			</p>
-			
-		<h2>Import Articles</h2>
-			<%= form_tag import_articles_path, multipart: true do %>
-			  <%= file_field_tag :file %>
-			  <%= submit_tag "Import" %>
-			<% end %>
+		<%= link_to 'Excel', article_export_path(@article.id) %>
 
+	</p>	
 			
 <p><%= link_to 'back to index', articles_path %></p>
 

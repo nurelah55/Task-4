@@ -33,13 +33,14 @@
 			  
 			  <%= link_to 'Excel', articles_path(format: "xls") %>
 			</p>
-			
-		<h2>Import Articles</h2>
-			<%= form_tag import_articles_path, multipart: true do %>
-			  <%= file_field_tag :file %>
-			  <%= submit_tag "Import" %>
-			<% end %>
 
+			<h3>Import Articles</h3>
+      <%= form_tag import_articles_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import" %>
+      <% end %>
+
+		
 		<footer>
           	
         </footer>

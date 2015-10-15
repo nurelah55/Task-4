@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   def index
-#    @articles = Article.all
-    @articles = Article.all.includes(:comments)
+  @articles = Article.all
+  #  @articles = Article.all.includes(:comments)
     #@articles = Article.joins('LEFT INNER JOIN comments ON comments.article_id = articles.id')
    # @comments = Article.find_by_id(params[:id]).comments
    #@articles = Article.status_active
@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
       format.js {
         @articles = Article.order(:title).page params[:page]
       }
-      format.csv { send_data Article.to_csv(@articles) }
+      #format.csv { send_data Article.to_csv(@articles) }
       format.xls 
     end
   end
@@ -23,7 +23,6 @@ class ArticlesController < ApplicationController
   
   def import
     Article.import(params[:file])
-    
     redirect_to root_url, notice: "Articles imported."
   end
 
@@ -49,12 +48,29 @@ class ArticlesController < ApplicationController
     @comment = Comment.new
     #@comments = Article.find(params[:id]).comments
     @comments = Comment.all.map{|x| [x.content, x.id]}
-    Article.find(params[:id])
+    #Article.find(params[:id])
   end
   
   def edit
     @article = Article.find_by_id(params[:id])
-    
+  end
+  
+  def export
+    @article = Article.find_by_id(params[:id])
+    @comments = Article.find_by_id(params[:id]).comments 
+    xlsx = Axlsx::Package.new
+    wb = xlsx.workbook
+    wb.add_worksheet(name: "Articles") do |sheet|
+      sheet.add_row ["title", "content", "created_at ", "updated_at"]
+      sheet.add_row [@article.title, @article.content, @article.created_at, @article.updated_at]
+    end
+     wb.add_worksheet(name: "Comment") do |sheet|
+      sheet.add_row ["content"]
+      @comments.each do |comment|
+        sheet.add_row [comment.content]
+      end
+    end
+   send_data xlsx.to_stream.read, type: "application/xlsx", filename: "articles.xlsx"
   end
   
   def update

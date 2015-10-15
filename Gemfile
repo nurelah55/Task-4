@@ -46,5 +46,7 @@ end
  gem 'bootstrap-sass', '~> 3.2.0'
  gem 'autoprefixer-rails'
  gem 'kaminari', '~> 0.16.3'
- gem 'roo', '~> 2.1.1'
  gem "iconv", "~> 1.0.3"
+ gem 'axlsx_rails', '~> 0.4.0'
+ gem 'axlsx', '~> 2.0.1'
+ gem 'roo'

@@ -9,7 +9,10 @@ Myblog::Application.routes.draw do
   resources :articles do
     collection { post :import }
     resources :comments
-  end# The priority is based upon order of creation: first created -> highest priority.
+  end
+  get 'articles/:id/export' => 'articles#export', as: :article_export
+  #get 'articles/import' => 'articles#import', as: :article_import
+  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
