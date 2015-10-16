@@ -25,3 +25,14 @@
 			<%= paginate @articles, remote: true %>
 
 </div>
+ <p>
+        Add New Article:
+        
+        <%= link_to 'Add', new_article_path %>
+      </p>
+
+      <h3>Import Articles</h3>
+      <%= form_tag import_articles_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import" %>
+      <% end %>

@@ -1,11 +1,42 @@
-<h3><%= @article.title %></h3>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <title><%= content_for?(:title) ?
+    yield(:title) : "Myapp" %></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head> 
+  <body style="padding-top:100px;">
+   <div class="navbar navbar-fixed-top navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+         
+          <div class = "navbar-brand">My Blog</div>
+        </div>
+      </div>    
+    </div>
+    <!--Put Content website here -->
+ <!-- Bagian Content -->
+    <div class="container clearfix">
+      <div class="row row-offcanvas row-offcanvas ">
+        <!--Bagian Kiri-->
+        <div class="col-xs-12 col-sm-4 side sidebar-offcanvas" role="navigation">
+          <h3><%= @article.title %></h3>
 <p><%= @article.content %></p>
 
 <% unless @article.comments.empty? %>
-    <%= @article.comments.count %>
-  <% end %> comments</p>
+    <%= @article.comments.count %> <p> comments</p>
+    
+  <% end %>
 
-	<%= form_for [@article, @comment], html: {class: 'form-horizontal', role: "form"} do |f| %>
+    <%= form_for [@article, @comment], html: {class: 'form-horizontal', role: "form"} do |f| %>
     <p>
     <%= f.label :content, "New Comment" %><br/>
     <%= f.text_area :content %>
@@ -15,12 +46,20 @@
     
 
     <p>
-	Exsport to:
-			  
-		<%= link_to 'Excel', article_export_path(@article.id) %>
+    Exsport to:
+              
+        <%= link_to 'Excel', article_export_path(@article.id) %>
 
-	</p>	
-			
+    </p>    
+            
 <p><%= link_to 'back to index', articles_path %></p>
+        </div>
+        
+        
+      </div>
+    </div>
+  </body>
+</html>
+
 
 

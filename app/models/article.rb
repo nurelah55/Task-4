@@ -20,19 +20,24 @@ class Article < ActiveRecord::Base
   	end
   	
 	def self.import(file)
-	  spreadsheet = open_spreadsheet(file)
-	  header = spreadsheet.row(1)
+      spreadsheet = open_spreadsheet(file)
+      sheet1 = spreadsheet.sheet('Articles')
+      header = sheet1.row(1)
+      (2..sheet1.last_row).each do |i|
+        row = Hash[[header, sheet1.row(i)].transpose]
+        article = find_by_id(row['id']) || new
+        article.attributes = row.to_hash.slice(*['title', 'content', 'created_at','updated_at'])
+        article.save!
+	    sheet2 = spreadsheet.sheet('Comment')
+        head = sheet2.row(1)
+ 		(2..sheet2.last_row).each do |a|
+ 			row2 = Hash[[head, sheet2.row(a)].transpose]
+ 			
+ 			Article.last.comments.create([row2])
+ 		end
 
-	  (2..spreadsheet.last_row).each do |i|
-	    row = Hash[[header, spreadsheet.row(i)].transpose]
-
-	    article = find_by_id(row['id']) || new
-
-	    article.attributes = row.to_hash.slice(*['title', 'content', 'created_at','updated_at'])
-	    article.save!
-	  end
-	end
-
+       end
+    end
 
 	def self.open_spreadsheet(file)
 	  case File.extname(file.original_filename)

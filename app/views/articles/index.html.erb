@@ -13,39 +13,28 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head> 
-  <body >
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-
-		</div>
-      </nav>
-    </header>
-    <div id="main" role="main">
+  <body style="padding-top:100px;">
+   <div class="navbar navbar-fixed-top navbar-default" role="navigation">
       <div class="container">
-        <div class="content">
-		<div class="row">
-			
-            <%= render "list" %>
-    </div>
-		<p>
-			  Exsport to:
-			  
-			  <%= link_to 'Excel', articles_path(format: "xls") %>
-			</p>
-
-			<h3>Import Articles</h3>
-      <%= form_tag import_articles_path, multipart: true do %>
-        <%= file_field_tag :file %>
-        <%= submit_tag "Import" %>
-      <% end %>
-
-		
-		<footer>
-          	
-        </footer>
+        <div class="navbar-header">
+         
+          <div class = "navbar-brand">My Blog</div>
         </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+      </div>    
+    </div>
+    <!--Put Content website here -->
+ <!-- Bagian Content -->
+    <div class="container clearfix">
+      <div class="row row-offcanvas row-offcanvas ">
+        <!--Bagian Kiri-->
+        <div class="col-xs-12 col-sm-4 side sidebar-offcanvas" role="navigation">
+          
+                    <%= render "list" %>
+          
+        </div>
+        
+        
+      </div>
+    </div>
   </body>
 </html>
